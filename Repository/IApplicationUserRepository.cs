@@ -11,10 +11,10 @@ namespace Repositories
     {
         List<ApplicationUser> GetApplicationUser();
 
-        ApplicationUser FindMemberById(int memberId);
+        ApplicationUser FindMemberById(string memberId);
         void CreateMember(ApplicationUser p);
         void UpdateMember(ApplicationUser p);
-        void DeleteMember(int id);
-        ApplicationUser FindMemberByEmail(String e);
+        void DeleteMember(string id);
+        ApplicationUser FindMemberByEmail(string e);
     }
 }

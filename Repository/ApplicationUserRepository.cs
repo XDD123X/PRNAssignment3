@@ -10,16 +10,16 @@ namespace Repositories
 {
     public class ApplicationUserRepository : IApplicationUserRepository
     {
-        public void CreateApplicationUser(ApplicationUser p) =>  ApplicationUserDAO.CreateApplicationUser(p);
+        public void CreateMember(ApplicationUser p) =>  ApplicationUserDAO.CreateApplicationUser(p);
 
-        public void DeleteApplicationUser(ApplicationUser p) => ApplicationUserDAO.DeleteApplicationUser(p);
+        public void DeleteMember(string id) => ApplicationUserDAO.DeleteApplicationUser(id);
 
-        public ApplicationUser FindApplicationUserByEmail(String email) => ApplicationUserDAO.FindApplicationUserByEmail(email);
+        public ApplicationUser FindMemberByEmail(string e) => ApplicationUserDAO.FindApplicationUserByEmail(e);
 
-        public ApplicationUser FindApplicationUserById(int ApplicationUserId) => ApplicationUserDAO.FindApplicationUserById(ApplicationUserId);
+        public ApplicationUser FindMemberById(string memberId) => ApplicationUserDAO.FindApplicationUserById(memberId);
 
-        public List<ApplicationUser> GetApplicationUsers() => ApplicationUserDAO.GetApplicationUsers();
+        public List<ApplicationUser> GetApplicationUser() => ApplicationUserDAO.GetApplicationUsers();
 
-        public void UpdateApplicationUser(ApplicationUser p) => ApplicationUserDAO.UpdateApplicationUser(p);
+        public void UpdateMember(ApplicationUser p) => ApplicationUserDAO.UpdateApplicationUser(p);
     }
 }

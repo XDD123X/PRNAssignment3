@@ -18,12 +18,10 @@ namespace BusinessObject.Model
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             var builder = new ConfigurationBuilder()
-                .SetBasePath(AppContext.BaseDirectory)
-                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
-
-            var configuration = builder.Build();
-            string connectionString = configuration.GetConnectionString("MyStoreDB");
-            optionsBuilder.UseSqlServer(connectionString);
+   .SetBasePath(Path.Combine(Directory.GetCurrentDirectory(), "../BusinessObject"))
+   .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+            IConfigurationRoot config = builder.Build();
+            optionsBuilder.UseSqlServer(config.GetConnectionString("MyStoreDB"));
         }
 
 
@@ -31,7 +29,7 @@ namespace BusinessObject.Model
         public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Category> Categories { get; set; }
-
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

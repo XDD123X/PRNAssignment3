@@ -16,12 +16,7 @@ namespace DataAccess
             {
                 using (var context = new MyStoreDBContext())
                 {
-                    listApplicationUsers = context.Users.Select(
-                        u => new ApplicationUser()
-                        {
-                            FirstName = u.UserName,
-                            Id = u.Id,
-                        })
+                    listApplicationUsers = context.ApplicationUsers
                         .ToList();
                 }
             }
@@ -38,13 +33,25 @@ namespace DataAccess
             {
                 using (var context = new MyStoreDBContext())
                 {
-                    p = context.Users.Select(
-                        u => new ApplicationUser()
-                        {
-                            UserName = u.UserName,
-                            Id = u.Id,
-                        })
+                    p = context.ApplicationUsers
                         .SingleOrDefault(x => x.Id.Equals(ApplicationUserId));
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+            return p;
+        }
+        public static ApplicationUser FindApplicationUserByEmail(string email)
+        {
+            ApplicationUser p = new ApplicationUser();
+            try
+            {
+                using (var context = new MyStoreDBContext())
+                {
+                    p = context.ApplicationUsers
+                        .SingleOrDefault(x => x.Email.Equals(email));
                 }
             }
             catch (Exception ex)
@@ -59,7 +66,7 @@ namespace DataAccess
             {
                 using (var context = new MyStoreDBContext())
                 {
-                    context.Users.Add(p);
+                    context.ApplicationUsers.Add(p);
                     context.SaveChanges();
                 }
             }
@@ -89,12 +96,12 @@ namespace DataAccess
             {
                 using (var context = new MyStoreDBContext())
                 {
-                    var ApplicationUser = context.Users
+                    var ApplicationUser = context.ApplicationUsers
                         .SingleOrDefault(x => x.Id.Equals(id));
 
                     if (ApplicationUser != null)
                     {
-                        context.Users.Remove(ApplicationUser);
+                        context.ApplicationUsers.Remove(ApplicationUser);
                         context.SaveChanges();
                     }
                     else
